@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,6 +47,9 @@ public class EventListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Inform user that the new event was created
+        Toast.makeText(EventListActivity.this, "New Event Created", Toast.LENGTH_SHORT).show();
+
         // Create an ArrayList to hold Events
         ListView eventList = (ListView) findViewById(R.id.event_list_view);
 
@@ -57,11 +61,17 @@ public class EventListActivity extends AppCompatActivity {
 
         events.add(e);
 
-        // Create ArrayAdapter using the events list
+        // Create EventsAdapter and set it to the ListView
         eventsAdapter = new EventsAdapter(this, events);
         eventList.setAdapter(eventsAdapter);
 
-        Toast.makeText(EventListActivity.this, "New Event Created", Toast.LENGTH_SHORT).show();
+        eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getBaseContext(), EventMainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public class EventsAdapter extends ArrayAdapter<Event> {
