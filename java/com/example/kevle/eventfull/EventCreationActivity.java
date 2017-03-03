@@ -1,5 +1,6 @@
 package com.example.kevle.eventfull;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -96,6 +97,7 @@ public class EventCreationActivity extends AppCompatActivity{
                 // Add loader
 
                 // Pass back data to EventListActivity and finish EventCreationActivity
+                // REFACTOR : use Bundle
                 Intent intent = new Intent();
                 intent.putExtra("dateValue", dateValue.getText().toString());
                 intent.putExtra("startTimeValue", startTimeValue.getText().toString());
@@ -104,7 +106,7 @@ public class EventCreationActivity extends AppCompatActivity{
                 intent.putExtra("descValue", descValue.getText().toString());
                 intent.putExtra("locationValue", locationValue.getText().toString());
 
-                setResult(RESULT_OK, intent);
+                setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });

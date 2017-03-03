@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class EventListActivity extends AppCompatActivity {
 
+    private ArrayAdapter<Event> eventsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,45 +37,50 @@ public class EventListActivity extends AppCompatActivity {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 Intent intent = new Intent(getBaseContext(), EventCreationActivity.class);
-                startActivityForResult(intent, RESULT_OK);
+                startActivityForResult(intent, 1);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-//            ListView eventList = (ListView) findViewById(R.id.event_list_view);
-//            ArrayList<Event> events = new ArrayList<Event>();
-//
-//            Event e = new Event(data.getStringExtra("nameValue"), data.getStringExtra("startTimeValue"),
-//                    data.getStringExtra("endTimeValue"), data.getStringExtra("dateValue"), data.getStringExtra("descValue"),
-//                    data.getStringExtra("locationValue"), "123");
-//
-//            events.add(e);
-            Toast.makeText(EventListActivity.this, data.getStringExtra("nameValue"), Toast.LENGTH_SHORT).show();
-        }
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Create an ArrayList to hold Events
+        ListView eventList = (ListView) findViewById(R.id.event_list_view);
+
+        ArrayList<Event> events = new ArrayList<Event>();
+
+        Event e = new Event(data.getStringExtra("nameValue"), data.getStringExtra("startTimeValue"),
+                data.getStringExtra("endTimeValue"), data.getStringExtra("dateValue"), data.getStringExtra("descValue"),
+                data.getStringExtra("locationValue"), "123");
+
+        events.add(e);
+
+        // Create ArrayAdapter using the events list
+        eventsAdapter = new EventsAdapter(this, events);
+        eventList.setAdapter(eventsAdapter);
+
+        Toast.makeText(EventListActivity.this, "New Event Created", Toast.LENGTH_SHORT).show();
     }
 
-//    public class EventsAdapter extends ArrayAdapter<Event> {
-//        public EventsAdapter(Context context, ArrayList<Event> event) {
-//            super(context, 0, event);
-//        }
-//
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//            // Get the data item for this position
-//            Event event = getItem(position);
-//            // Check if an existing view is being reused, otherwise inflate the view
-//            if (convertView == null) {
-//                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
-//            }
-//            // Lookup view for data population
-//            TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-//            // Populate the data into the template view using the data object
-//
-//            // Return the completed view to render on screen
-//            return convertView;
-//        }
-//    }
+    public class EventsAdapter extends ArrayAdapter<Event> {
+        public EventsAdapter(Context context, ArrayList<Event> users) {
+            super(context, 0, users);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get data for the item at that position
+            Event event = getItem(position);
+
+            // Check if an existing view is being used; otherwise inflate it
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_row, parent, false);
+            }
+            TextView t = (TextView) convertView.findViewById(R.id.rowTextView);
+            t.setText(event.eventName);
+            return convertView;
+        }
+    }
 }
