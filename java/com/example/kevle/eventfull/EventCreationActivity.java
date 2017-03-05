@@ -96,7 +96,7 @@ public class EventCreationActivity extends AppCompatActivity{
 
                 // Add loader
 
-                // Pass back data to EventListActivity and finish EventCreationActivity
+                // Pass back data to EventActivity and finish EventCreationActivity
                 // REFACTOR : use Bundle
                 Intent intent = new Intent();
                 intent.putExtra("dateValue", dateValue.getText().toString());
@@ -115,8 +115,8 @@ public class EventCreationActivity extends AppCompatActivity{
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // NEED TO REFACTOR THIS: JUST RESUME EventListActivity instead of re-creating it.
-                Intent intent = new Intent(getBaseContext(), EventListActivity.class);
+                // NEED TO REFACTOR THIS: JUST RESUME EventActivity instead of re-creating it.
+                Intent intent = new Intent(getBaseContext(), EventActivity.class);
                 startActivity(intent);
             }
         });
