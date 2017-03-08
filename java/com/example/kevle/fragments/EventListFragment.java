@@ -61,14 +61,7 @@ public class EventListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.activity_event, container, false);
-
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        EventDetailsFragment detailsFragment;
-
-        detailsFragment = EventDetailsFragment.newInstance("foo", "bar");
-        fm.beginTransaction().replace(R.id.scroll_view_container, detailsFragment).addToBackStack(null).commit();
-
+        View v = inflater.inflate(R.layout.fragment_event_list, container, false);
         return v;
     }
 }
