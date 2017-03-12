@@ -8,14 +8,6 @@
     android:orientation="vertical"
     tools:context="com.example.kevle.eventfull.EventActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
