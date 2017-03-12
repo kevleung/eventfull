@@ -41,8 +41,6 @@ public class EventMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -150,11 +148,11 @@ public class EventMainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Event Details";
                 case 1:
-                    return "SECTION 2";
+                    return "Chat";
                 case 2:
-                    return "SECTION 3";
+                    return "Split Bill";
             }
             return null;
         }

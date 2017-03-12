@@ -1,5 +1,6 @@
 package com.example.kevle.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.kevle.evenfull.models.Event;
 import com.example.kevle.eventfull.EventActivity;
+import com.example.kevle.eventfull.EventMainActivity;
 import com.example.kevle.eventfull.R;
 import com.example.kevle.holders.EventListViewHolder;
 
@@ -41,7 +43,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListViewHolder> 
             @Override
             public void onClick(View v) {
                 // load the event details fragment
-                EventActivity.getEventActivity().loadDetailsScreen(event);
+                EventActivity.getEventActivity().loadEventDetailsScreen(event);
             }
         });
     }
