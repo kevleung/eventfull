@@ -1,14 +1,19 @@
 package com.example.kevle.fragments;
 
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.kevle.adapters.EventListAdapter;
+import com.example.kevle.eventfull.DividerItemDecoration;
 import com.example.kevle.eventfull.R;
+import com.example.kevle.services.EventDataService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +67,32 @@ public class EventListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_event_list, container, false);
+
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.events_recycler_view);
+        recyclerView.setHasFixedSize(true);
+
+        EventListAdapter adapter = new EventListAdapter(EventDataService.getInstance().getEvents());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
         return v;
     }
 }
+//
+//class SpaceItemDecorator extends RecyclerView.ItemDecoration {
+//    private final int spacer;
+//
+//    public SpaceItemDecorator(int spacer) {
+//        this.spacer = spacer;
+//    }
+//
+//    @Override
+//    public void getItemOffsets (Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//        super.getItemOffsets(outRect, view, parent, state);
+//        outRect.bottom = spacer;
+//    }
+//}

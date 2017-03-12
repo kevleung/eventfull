@@ -1,7 +1,5 @@
 package com.example.kevle.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kevle.adapters.EventDetailsAdapter;
+import com.example.kevle.adapters.EventListAdapter;
 import com.example.kevle.eventfull.R;
 
 /**
@@ -67,17 +65,6 @@ public class EventDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_event, container, false);
-
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycler_details);
-        recyclerView.setHasFixedSize(true);
-
-        EventDetailsAdapter adapter = new EventDetailsAdapter();
-        recyclerView.setAdapter(adapter);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-
         return v;
     }
 }

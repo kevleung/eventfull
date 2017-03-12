@@ -7,20 +7,34 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.kevle.evenfull.models.Event;
+import com.example.kevle.fragments.EventDetailsFragment;
 import com.example.kevle.fragments.EventListFragment;
 
 public class EventActivity extends AppCompatActivity {
 
     //private ArrayAdapter<Event> eventsAdapter;
+    private static EventActivity eventActivity;
+
+    public static void setEventActivity(EventActivity eventActivity) {
+        EventActivity.eventActivity = eventActivity;
+    }
+
+    public static EventActivity getEventActivity() {
+        return eventActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+
+        EventActivity.setEventActivity(this);
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.framelayout_id);
@@ -43,6 +57,10 @@ public class EventActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+    }
+
+    public void loadDetailsScreen(Event selectedEvent) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new EventDetailsFragment()).addToBackStack(null).commit();
     }
 
 //    @Override
