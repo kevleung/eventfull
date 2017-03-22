@@ -13,6 +13,8 @@ public class Event {
     private String eventLocation;
     private String eventOwner;
 
+    public Event() {};
+    
     public Event(String name, String start, String end, String date, String desc, String loc, String owner) {
         this.eventName = name;
         this.setEventStartTime(start);

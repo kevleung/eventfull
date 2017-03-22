@@ -1,8 +1,18 @@
 package com.example.kevle.services;
 
+import android.util.Log;
+
+import com.example.kevle.adapters.EventListAdapter;
 import com.example.kevle.evenfull.models.Event;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by kevle on 3/11/2017.
@@ -10,6 +20,9 @@ import java.util.ArrayList;
 
 public class EventDataService {
     private static final EventDataService ourInstance = new EventDataService();
+    private DatabaseReference mDatabase;
+    EventListAdapter eventListAdapter;
+    public ArrayList<Event> eventList = new ArrayList<>();
 
     public static EventDataService getInstance() {
         return ourInstance;
@@ -19,13 +32,22 @@ public class EventDataService {
     }
 
     public ArrayList<Event> getEvents() {
-        // Pretend we just got data from Firebase
-        ArrayList<Event> list = new ArrayList<>();
-        list.add(new Event("Sushi nom", "22:00", "23:00", "03/12/2017", "Nom nom nom on sushi", "Toronto", "Kevin"));
-        list.add(new Event("Drinking nom", "22:00", "23:00", "03/12/2017", "Nom nom nom on sushi", "Toronto", "Kevin"));
+        mDatabase = FirebaseDatabase.getInstance().getReference("events");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot eventSnapShot: dataSnapshot.getChildren()) {
+                    Event e = eventSnapShot.getValue(Event.class);
+                    eventList.add(e);
+                }
+                eventListAdapter = new EventListAdapter(eventList);
+            }
 
-        return list;
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadEvents:onCancelled", databaseError.toException());
+            }
+        });
+        return eventList;
     }
-
-
 }

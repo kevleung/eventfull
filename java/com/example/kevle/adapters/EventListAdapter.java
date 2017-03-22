@@ -42,8 +42,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // load the event details fragment
-                EventActivity.getEventActivity().loadEventDetailsScreen(event);
+            // load the event details fragment
+            EventActivity.getEventActivity().loadEventDetailsScreen(event);
             }
         });
     }
@@ -51,5 +51,9 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListViewHolder> 
     @Override
     public int getItemCount() {
         return eventsList.size();
+    }
+
+    public void clear() {
+        this.eventsList.clear();
     }
 }
