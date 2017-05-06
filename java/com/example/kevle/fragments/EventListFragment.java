@@ -82,7 +82,7 @@ public class EventListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.events_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        EventDataService service = new EventDataService();
+        EventListService service = new EventListService();
         service.getEvents();
         adapter = new EventListAdapter(loadedEventList);
 
@@ -96,10 +96,10 @@ public class EventListFragment extends Fragment {
         return v;
     }
 
-    public class EventDataService {
+    public class EventListService {
         private DatabaseReference mDatabase;
 
-        public EventDataService() {
+        public EventListService() {
         }
 
         public void getEvents() {
@@ -123,19 +123,3 @@ public class EventListFragment extends Fragment {
         }
     }
 }
-
-
-//
-//class SpaceItemDecorator extends RecyclerView.ItemDecoration {
-//    private final int spacer;
-//
-//    public SpaceItemDecorator(int spacer) {
-//        this.spacer = spacer;
-//    }
-//
-//    @Override
-//    public void getItemOffsets (Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//        super.getItemOffsets(outRect, view, parent, state);
-//        outRect.bottom = spacer;
-//    }
-//}

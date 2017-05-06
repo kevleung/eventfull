@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.example.kevle.evenfull.models.Event;
+import com.example.kevle.fragments.EventChatFragment;
+import com.example.kevle.fragments.EventCreationFragment;
 import com.example.kevle.fragments.EventDetailsFragment;
 import com.example.kevle.fragments.EventListFragment;
 
@@ -48,22 +50,20 @@ public class EventActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                Intent intent = new Intent(getBaseContext(), EventCreationActivity.class);
-                startActivity(intent);
-                // call loadEventCreationFragment() here
+//                Intent intent = new Intent(getBaseContext(), EventCreationActivity.class);
+//                startActivity(intent);
+                loadEventCreationFragment();
             }
         });
     }
 
-//    public void loadEventCreationFragment(Event selectedEvent) {
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.framelayout_id, new <event creation fragment>())
-//                .addToBackStack(null).commit();
-//    }
+    public void loadEventCreationFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.framelayout_id, new EventCreationFragment())
+                .addToBackStack(null).commit();
+    }
 
-    public void loadEventDetailsScreen (Event selectedEvent) {
+    public void loadEventMainActivity (Event selectedEvent) {
         Intent intent = new Intent(getBaseContext(), EventMainActivity.class);
         intent.putExtra("startTime", selectedEvent.getEventStartTime());
         intent.putExtra("name", selectedEvent.getEventName());

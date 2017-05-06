@@ -43,7 +43,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListViewHolder> 
             @Override
             public void onClick(View v) {
             // load the event details fragment
-            EventActivity.getEventActivity().loadEventDetailsScreen(event);
+            EventActivity.getEventActivity().loadEventMainActivity(event);
             }
         });
     }
